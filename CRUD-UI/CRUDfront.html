@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <body ng-app="nameAdderAndDisplay" ng-controller="nameAdder">
+               
+
+<h2>
+    Perform the operations you wish
+  </h2>
+  <h3>{{message}}</h3>
+        <div>
+          <button ng-click="setOperationType('add');">Add New User</button>
+          <button ng-click="setOperationType('alter');">Alter Existing User</button>
+          <button  ng-click="setOperationType('delete');">Delete Existing User</button>
+          <button  ng-click="setOperationType('view');">View All Users</button>
+          <button  ng-click="setOperationType('viewUser');">View Particular User</button>
+        
+        </div>
+  
+        <div ng-if="operationType =='add' || operationType =='alter'">
+            firstName<input type="text" ng-model="user.firstName"><br>
+            lastName<input type="text" ng-model="user.lastName"><br>
+            age<input type="text" ng-model="user.age"><br>
+            department<input type="text" ng-model="user.department"><br>
+  
+        </div>
+  
+        <br>
+        
+        <div ng-if="operationType=='delete' || operationType=='alter' || operationType=='viewUser'">
+          id<input ng-model="user.id">
+        </div>
+        
+        <br>
+  
+        <div>
+          <button  ng-if="operationType=='add'" ng-click="addUser(user);">Add New User</button>
+          <button  ng-if="operationType=='alter'" ng-click="alterUserData(user.id);">Alter Existing User</button>
+          <button  ng-if="operationType=='delete'" ng-click="deleteUser(user.id);">Delete Existing User</button>
+          <button  ng-if="operationType=='view'" ng-click="viewAllUsers();">View All Users</button>
+          <button  ng-if="operationType=='viewUser'" ng-click="viewUser(user.id);">View Particular User</button>
+        </div>
+        
+        <div ng-if="operationType=='view'">
+            <br>
+          <ul ng-repeat="entity in users">
+              <li style="display:inline"> ID: {{entity.id}}</li>&nbsp;&nbsp;
+              <li style="display:inline">FIRSTNAME: {{entity.firstName}}</li>&nbsp;&nbsp;
+              <li style="display:inline">LASTNAME: {{entity.lastName}}</li>&nbsp;&nbsp;
+              <li style="display:inline">AGE: {{entity.age}}</li>&nbsp;&nbsp;
+              <li style="display:inline">DEPARTMENT: {{entity.department}}</li>
+          </ul>
+          <br>
+       </div>
+
+       <div ng-if="operationType=='viewUser'">
+        <br>
+      <ul >
+          <li style="display:inline"> ID: {{entity.id}}</li>&nbsp;&nbsp;
+          <li style="display:inline">FIRSTNAME: {{entity.firstName}}</li>&nbsp;&nbsp;
+          <li style="display:inline">LASTNAME: {{entity.lastName}}</li>&nbsp;&nbsp;
+          <li style="display:inline">AGE: {{entity.age}}</li>&nbsp;&nbsp;
+          <li style="display:inline">DEPARTMENT: {{entity.department}}</li>
+      </ul>
+      <br>
+   </div>
+
+                </div>
+
+<script src="nameAdderController.js"></script>
+        </body>
+    </head>
+</html>
